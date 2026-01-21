@@ -15,9 +15,25 @@ libra switch [OPTIONS] [BRANCH]
 
 Switch to a specified branch. The working tree and the index are updated to match the branch. You should make sure the working tree is clean before switching branches. Otherwise, the operation will be aborted.
 
-**Handle with remote branches**
+**Remote branches**
 
-If you want to switch to a remote branch, you need to create a new branch based on the remote branch and switch to it.
+Libra does not automatically create a local tracking branch when you switch to a remote branch. If you want to create a local branch that tracks a remote branch, use `--track`.
+
+```shell
+libra fetch origin
+libra switch --track origin/new-branch
+```
+
+This creates a local branch `new-branch`, sets its upstream to `origin/new-branch`, and switches to it.
+
+If the remote is `origin`, you can omit it:
+
+```shell
+libra fetch origin
+libra switch --track new-branch
+```
+
+If you prefer to do it manually, you can still create a local branch from a remote branch and switch to it.
 
 ```shell
 libra fetch origin
@@ -34,10 +50,13 @@ libra switch new-branch
 -   `-d`, `--detach`
     Switch to a commit.
 
+-   `--track`
+    Create a local tracking branch when switching to a remote branch.
+
 <Note type="note" title="Note">
 The options of the switch command are same as git, but the behavior is different.
 
-1. Git has a feature that, when you switch to a branch didn't exist locally but exists remotely, it will create a new branch locally and track the remote branch. Libra doesn't support this feature yet.
+1. Git can create a local tracking branch when you switch to a branch that exists remotely. In Libra, you can use `libra switch --track <remote>/<branch>` to get a similar behavior.
 
 2. Git didn't require a clean index and working tree before switching branches, but libra does.
 
