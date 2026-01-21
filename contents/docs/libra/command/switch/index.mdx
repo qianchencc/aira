@@ -17,7 +17,9 @@ Switch to a specified branch. The working tree and the index are updated to matc
 
 **Remote branches**
 
-Libra does not automatically create a local tracking branch when you switch to a remote branch. If you want to create a local branch that tracks a remote branch, use `--track`.
+By default, Libra does not create a local tracking branch when you switch to a remote branch. Use `--track` to create one.
+
+Make sure the remote-tracking ref exists (run `libra fetch <remote>` first).
 
 ```shell
 libra fetch origin
@@ -51,7 +53,7 @@ libra switch new-branch
     Switch to a commit.
 
 -   `--track`
-    Create a local tracking branch when switching to a remote branch.
+    Create a local branch from a remote-tracking branch and set upstream.
 
 <Note type="note" title="Note">
 The options of the switch command are same as git, but the behavior is different.
